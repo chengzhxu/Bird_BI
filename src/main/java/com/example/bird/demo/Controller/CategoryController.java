@@ -3,6 +3,8 @@ package com.example.bird.demo.Controller;
 
 import com.example.bird.demo.Entity.Category;
 import com.example.bird.demo.Service.CategoryService;
+import com.example.bird.demo.Tool.Response;
+import com.example.bird.demo.Tool.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class CategoryController {
      */
     @RequestMapping("/getCategoryList")
     @ResponseBody
-    public List<Category> getCategoryList(String name){
+    public ResponseResult<List<Category>> getCategoryList(String name){
         List<Category> category = null;
 
         if(name != null){
@@ -34,8 +36,7 @@ public class CategoryController {
             category = categoryService.getAllCategory();
         }
 
-
-        return category;
+        return Response.makeOKRsp(category);
     }
 
 }
